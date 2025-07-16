@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Craving - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #181a1b;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .navbar {
+            width: 90vw;
+            max-width: 1200px;
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.7rem 2.5vw;
+            z-index: 10;
+            box-shadow: 0 4px 32px #0003;
+            border-radius: 40px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08);
+            animation: fadeInDown 1.2s cubic-bezier(.77,0,.18,1) 0.1s both;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .navbar .logo {
+            position: absolute;
+            left: 0;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            height: 80%;
+        }
+        .navbar .logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: left;
+            position-area: left;
+            padding-left: 0;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .navbar nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .navbar nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+            transition: width 0.3s;
+            position: absolute;
+            left: 0; bottom: -4px;
+        }
+        .navbar nav a:hover {
+            color: #fc5c7d;
+        }
+        .navbar nav a:hover::after {
+            width: 100%;
+        }
+        .hero {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 6rem;
+            background: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            gap: 4vw;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(24,26,27,0.7);
+            z-index: 0;
+        }
+        .hero-content, .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+        .tagline {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 2.2rem;
+            color: #b3b8c2;
+        }
+        .cta-btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+            border: none;
+            border-radius: 32px;
+            cursor: pointer;
+            box-shadow: 0 4px 24px #fc5c7d22;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 8px 32px #fc5c7d44, 0 4px 24px #6a82fb22;
+        }
+        .hero-image {
+            min-width: 320px;
+            max-width: 420px;
+            width: 35vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .bottle-svg {
+            width: 100%;
+            max-width: 340px;
+            filter: drop-shadow(0 8px 32px #6a82fb33);
+            animation: bottleFloat 3s ease-in-out infinite alternate;
+        }
+        @keyframes bottleFloat {
+            from { transform: translateY(0); }
+            to { transform: translateY(-18px); }
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin: 4rem 0 2rem 0;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 2.5vw;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 32px #6a82fb11;
+            padding: 2rem 2.5rem;
+            min-width: 220px;
+            max-width: 320px;
+            margin: 1rem 0;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #ececec;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 8px 32px #fc5c7d22, 0 4px 24px #6a82fb11;
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fc5c7d;
+        }
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #232526;
+        }
+        .feature-desc {
+            font-size: 1rem;
+            color: #555;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 2rem 0 1rem 0;
+            color: #aaa;
+            font-size: 1rem;
+            background: #fff;
+            margin-top: 3rem;
+            border-top: 1px solid #ececec;
+        }
+        @media (min-width: 601px) {
+            .mobile-menu { display: none !important; }
+        }
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: scale(0.98) translateY(-20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @media (max-width: 900px) {
+            .navbar {
+                width: 98vw;
+                padding: 0.7rem 2vw;
+                max-width: 100vw;
+            }
+            .hero {
+                flex-direction: column;
+                gap: 2rem;
+                padding-top: 7rem;
+            }
+            .hero-image {
+                width: 60vw;
+                min-width: 220px;
+            }
+            .features {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            .feature-card {
+                min-width: 180px;
+                max-width: 90vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                width: 98vw;
+                padding: 0.7rem 4vw;
+                top: 0.7rem;
+                border-radius: 32px;
+            }
+            .navbar .logo {
+                position: absolute;
+                left: 0;
+                padding-left: 25px;
+                font-size: 1.7rem;
+            }
+            .navbar nav {
+                display: none;
+            }
+            .navbar .menu-toggle {
+                display: flex !important;
+                align-items: center;
+                margin-left: auto;
+                cursor: pointer;
+                z-index: 101;
+            }
+            .hero {
+                flex-direction: column;
+                gap: 1.2rem;
+                padding-top: 6.5rem;
+            }
+            .hero-content {
+                max-width: 95vw;
+                padding: 0 1vw;
+            }
+            .hero-image {
+                width: 90vw;
+                min-width: 120px;
+                max-width: 95vw;
+            }
+            .brand {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .features {
+                gap: 1.2rem;
+            }
+            .feature-card {
+                padding: 1.2rem 1rem;
+                min-width: 120px;
+                max-width: 95vw;
+            }
+        }
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .navbar {
+                width: 96vw;
+                padding: 0.7rem 2vw;
+                max-width: 100vw;
+            }
+            .hero {
+                flex-direction: row;
+                gap: 2vw;
+                padding-top: 6rem;
+            }
+            .hero-content {
+                max-width: 60vw;
+            }
+            .hero-image {
+                width: 40vw;
+                min-width: 180px;
+                max-width: 350px;
+            }
+            .features {
+                gap: 2vw;
+            }
+            .feature-card {
+                min-width: 180px;
+                max-width: 45vw;
+            }
+        }
+        .side-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: auto;
+            bottom: 0;
+            width: 80vw;
+            max-width: 320px;
+            background: #232323;
+            box-shadow: -4px 0 32px #0006;
+            z-index: 200;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(.77,0,.18,1);
+            border-radius: 32px 0 0 32px;
+            padding-top: 2rem;
+        }
+        .side-mobile-menu.active {
+            display: block;
+            transform: translateX(0);
+        }
+        .side-mobile-menu-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 1.2rem 0.5rem 0;
+        }
+        .side-mobile-menu-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .side-mobile-menu-close svg {
+            width: 28px;
+            height: 28px;
+        }
+        .side-mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-left: 2rem;
+            margin-top: 2rem;
+        }
+        .side-mobile-menu-links a {
+            color: #fff;
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .side-mobile-menu-links a:hover {
+            color: #fc5c7d;
+        }
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        .icon-menu {
+            width: 24px;
+            height: 24px;
+        }
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+                cursor: pointer;
+                z-index: 101;
+            }
+            .mobile-menu-toggle .icon-menu {
+                width: 32px;
+                height: 32px;
+                fill: #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <span>MC</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contacts</a>
+        </nav>
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <svg class="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+    </div>
+    <div class="side-mobile-menu" id="sideMobileMenu">
+        <div class="side-mobile-menu-header">
+            <div class="side-mobile-menu-close" id="sideMenuCloseBtn" title="Close menu">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#232526"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+        </div>
+        <div class="side-mobile-menu-links">
+            <a href="index.html">HOME</a>
+            <a href="shop.html">SHOP</a>
+            <a href="#about">ABOUT</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+    </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="brand">Men's Craving</div>
+            <div class="tagline">Redefine Masculinity. Experience the Art of Fragrance.</div>
+            <button class="cta-btn">Shop Now</button>
+        </div>
+        <div class="hero-image">
+            <svg class="bottle-svg" viewBox="0 0 180 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="90" cy="320" rx="60" ry="18" fill="#ececec"/>
+                <rect x="60" y="40" width="60" height="40" rx="20" fill="#232526"/>
+                <rect x="40" y="80" width="100" height="180" rx="40" fill="url(#paint0_linear)"/>
+                <rect x="50" y="180" width="80" height="40" rx="20" fill="#fc5c7d"/>
+                <text x="90" y="205" text-anchor="middle" font-size="16" font-family="Montserrat, sans-serif" fill="#fff" font-weight="bold">Men's</text>
+                <text x="90" y="225" text-anchor="middle" font-size="16" font-family="Montserrat, sans-serif" fill="#fff" font-weight="bold">Craving</text>
+                <defs>
+                    <linearGradient id="paint0_linear" x1="40" y1="80" x2="140" y2="260" gradientUnits="userSpace">
+                    <stop offset="0%" stop-color="#fc5c7d"/>
+                    <stop offset="100%" stop-color="#6a82fb"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+    </section>
+    <section class="features" id="work">
+        <div class="section-title">Our Features</div>
+        <div class="feature-card">
+            <div class="feature-icon">🌟</div>
+            <div class="feature-title">Quality Ingredients</div>
+            <div class="feature-desc">We use only the finest ingredients to create our fragrances, ensuring a luxurious experience.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <div class="feature-title">Artistic Craftsmanship</div>
+            <div class="feature-desc">Each fragrance is a masterpiece, crafted with precision and artistry.</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <div class="feature-title">Fast Shipping</div>
+            <div class="feature-desc">Enjoy swift and reliable shipping, getting your favorite scents delivered to your doorstep in no time.</div>
+        </div>
+    </section>
+    <footer class="footer">
+        &copy; 2023 Men's Craving. All rights reserved.
+    </footer>
+    <script>
+        // Side menu logic for mobile
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sideMobileMenu = document.getElementById('sideMobileMenu');
+        const sideMenuCloseBtn = document.getElementById('sideMenuCloseBtn');
+        if (mobileMenuToggle && sideMobileMenu && sideMenuCloseBtn) {
+            mobileMenuToggle.addEventListener('click', () => {
+                sideMobileMenu.classList.add('active');
+            });
+            sideMenuCloseBtn.addEventListener('click', () => {
+                sideMobileMenu.classList.remove('active');
+            });
+            document.querySelectorAll('.side-mobile-menu-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    sideMobileMenu.classList.remove('active');
+                });
+            });
+        }
+        // Side menu logic for mobile
+        const menuToggleBtn = document.querySelector('.navbar .menu-toggle');
+        if (menuToggleBtn && sideMobileMenu && sideMenuCloseBtn) {
+            menuToggleBtn.addEventListener('click', () => {
+                sideMobileMenu.classList.add('active');
+            });
+        }
+    </script>
+</body>
+</html>

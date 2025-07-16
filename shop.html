@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Craving - Shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Copy of index.html styles for full theme consistency --- */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #181a1b;
+            color: #fff;
+            min-height: 100vh;
+        .navbar {
+            width: 90vw;
+            max-width: 1200px;
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.7rem 2.5vw;
+            z-index: 10;
+            box-shadow: 0 4px 32px #0003;
+            border-radius: 40px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08);
+            animation: fadeInDown 1.2s cubic-bezier(.77,0,.18,1) 0.1s both;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .navbar .logo {
+            position: absolute;
+            left: 0;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            height: 80%;
+        }
+        .navbar .logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: left;
+            position-area: left;
+            padding-left: 0;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .navbar nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .navbar nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+            transition: width 0.3s;
+            position: absolute;
+            left: 0; bottom: -4px;
+        }
+        .navbar nav a:hover {
+            color: #fc5c7d;
+        }
+        .navbar nav a:hover::after {
+            width: 100%;
+        }
+        @media (min-width: 601px) {
+            .mobile-menu { display: none !important; }
+        }
+        @keyframes fadeInMenu {
+            from { opacity: 0; transform: scale(0.98) translateY(-20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @media (max-width: 900px) {
+            .navbar {
+                width: 98vw;
+                padding: 0.7rem 2vw;
+                max-width: 100vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                width: 99vw;
+                padding: 0.7rem 2vw;
+                top: 0.7rem;
+                border-radius: 32px;
+            }
+            .navbar .logo {
+                position: absolute;
+                left: 0;
+                padding-left: 12px;
+                font-size: 1.3rem;
+            }
+            .navbar nav {
+                display: none;
+            }
+            .navbar .menu-toggle {
+                display: flex !important;
+                align-items: center;
+                margin-left: auto;
+                cursor: pointer;
+                z-index: 101;
+            }
+        }
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .navbar {
+                width: 96vw;
+                padding: 0.7rem 2vw;
+                max-width: 100vw;
+            }
+        }
+        .side-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: auto;
+            bottom: 0;
+            width: 80vw;
+            max-width: 320px;
+            background: #232323;
+            box-shadow: -4px 0 32px #0006;
+            z-index: 200;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(.77,0,.18,1);
+            border-radius: 32px 0 0 32px;
+            padding-top: 2rem;
+        }
+        .side-mobile-menu.active {
+            display: block;
+            transform: translateX(0);
+        }
+        .side-mobile-menu-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 1.2rem 0.5rem 0;
+        }
+        .side-mobile-menu-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .side-mobile-menu-close svg {
+            width: 28px;
+            height: 28px;
+        }
+        .side-mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-left: 2rem;
+            margin-top: 2rem;
+        }
+        .side-mobile-menu-links a {
+            color: #fff;
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .side-mobile-menu-links a:hover {
+            color: #fc5c7d;
+        }
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        .icon-menu {
+            width: 24px;
+            height: 24px;
+        }
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+                cursor: pointer;
+                z-index: 101;
+            }
+            .mobile-menu-toggle .icon-menu {
+                width: 32px;
+                height: 32px;
+                fill: #fff;
+            }
+        }
+        /* --- Shop page specific styles --- */
+        .shop-section {
+            margin-top: 8rem;
+            padding: 2rem 0 3rem 0;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .shop-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 2.5rem;
+            letter-spacing: 1px;
+        }
+        .product-slider-container {
+            width: 90vw;
+            max-width: 1200px;
+            overflow: hidden;
+            position: relative;
+        }
+        .product-slider {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .product-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 32px #6a82fb11;
+            padding: 1.5rem 1.2rem 2rem 1.2rem;
+            min-width: 220px;
+            max-width: 260px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #ececec;
+            color: #232526;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .product-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 16px #fc5c7d22;
+        }
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .product-desc {
+            font-size: 0.98rem;
+            color: #555;
+            margin-bottom: 1.2rem;
+        }
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fc5c7d;
+            margin-bottom: 1.2rem;
+        }
+        .product-btn {
+            padding: 0.7rem 1.7rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+            border: none;
+            border-radius: 32px;
+            cursor: pointer;
+            box-shadow: 0 4px 24px #fc5c7d22;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product-btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 8px 32px #fc5c7d44, 0 4px 24px #6a82fb22;
+        }
+        .slider-arrow {
+            display: none !important;
+        }
+        .slider-arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(30,30,30,0.18);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.5;
+            z-index: 4;
+            transition: opacity 0.2s, background 0.2s;
+        }
+        .slider-arrow-btn.left { left: 8px; }
+        .slider-arrow-btn.right { right: 8px; }
+        .slider-arrow-btn:hover {
+            opacity: 1;
+            background: rgba(30,30,30,0.38);
+        }
+        @media (max-width: 600px) {
+            .slider-arrow-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 1.2rem;
+            }
+            .slider-arrow-btn.left { left: 2px; }
+            .slider-arrow-btn.right { right: 2px; }
+        }
+        /* Product scroll zones */
+        .scroll-zone {
+            position: absolute;
+            top: 0;
+            width: 48px;
+            height: 100%;
+            z-index: 3;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .scroll-zone.left {
+            left: 0;
+            background: linear-gradient(90deg, #232323cc 60%, transparent 100%);
+            border-radius: 20px 0 0 20px;
+        }
+        .scroll-zone.right {
+            right: 0;
+            background: linear-gradient(270deg, #232323cc 60%, transparent 100%);
+            border-radius: 0 20px 20px 0;
+        }
+        .scroll-zone:hover {
+            opacity: 0.18;
+        }
+        .product-slider-container {
+            position: relative;
+        }
+        @media (max-width: 1200px) {
+            .product-slider-container {
+                max-width: 98vw;
+            }
+            .product-card {
+                min-width: 200px;
+                max-width: 220px;
+            }
+        }
+        @media (max-width: 900px) {
+            .shop-section {
+                margin-top: 6rem;
+                padding: 1.5rem 0 2rem 0;
+            }
+            .product-slider-container {
+                width: 98vw;
+                max-width: 100vw;
+            }
+            .product-card {
+                min-width: 160px;
+                max-width: 180px;
+                padding: 1.2rem 0.7rem 1.5rem 0.7rem;
+            }
+            .shop-title {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .product-slider-container {
+                width: 99vw;
+                max-width: 100vw;
+            }
+            .product-card {
+                min-width: 80vw;
+                max-width: 90vw;
+                padding: 1rem 0.5rem 1.2rem 0.5rem;
+            }
+            .shop-title {
+                font-size: 1.2rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                width: 99vw;
+                padding: 0.7rem 2vw;
+                top: 0.7rem;
+                border-radius: 32px;
+            }
+            .navbar .logo {
+                position: absolute;
+                left: 0;
+                padding-left: 12px;
+                font-size: 1.3rem;
+            }
+            .navbar nav {
+                display: none;
+            }
+            .shop-section {
+                margin-top: 4.5rem;
+                padding: 0.7rem 0 1.2rem 0;
+            }
+            .shop-title {
+                font-size: 1.05rem;
+                margin-bottom: 1.2rem;
+            }
+            .product-slider-container {
+                width: 100vw;
+                max-width: 100vw;
+                padding: 0 0.5vw;
+            }
+            .product-card {
+                min-width: 92vw;
+                max-width: 97vw;
+                padding: 0.8rem 0.2rem 1.1rem 0.2rem;
+                font-size: 0.98rem;
+            }
+            .product-card img {
+                width: 90px;
+                height: 90px;
+            }
+            .slider-arrow-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
+            .slider-arrow-btn.left { left: 2px; }
+            .slider-arrow-btn.right { right: 2px; }
+            #productBarTrack {
+                height: 8px !important;
+                margin: 10px 0 0 0 !important;
+            }
+            #productBarThumb {
+                min-width: 28px !important;
+            }
+        }
+        @media (max-width: 400px) {
+            .product-card {
+                min-width: 98vw;
+                max-width: 100vw;
+                padding: 0.5rem 0.1rem 0.7rem 0.1rem;
+            }
+            .shop-title {
+                font-size: 0.95rem;
+            }
+        }
+        /* Hide scrollbars for slider on mobile */
+        .product-slider {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .product-slider::-webkit-scrollbar {
+            display: none;
+        }
+        /* Ensure slider bar is always visible and touch-friendly */
+        #productBarTrack {
+            min-height: 8px;
+            cursor: pointer;
+        }
+        #productBarThumb {
+            min-width: 36px;
+            transition: background 0.2s;
+        }
+        #productBarThumb:active {
+            background: linear-gradient(90deg,#6a82fb,#fc5c7d);
+        }
+        /* See More Products Slider */
+        .see-more-slider-container { margin-bottom: 2.5rem; }
+        .see-more-slider { overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+        .see-more-slider::-webkit-scrollbar { display: none; }
+        @media (max-width: 900px) {
+            .see-more-slider-container { width:98vw;max-width:100vw; }
+        }
+        @media (max-width: 600px) {
+            .see-more-slider-container { width:100vw;max-width:100vw; }
+            .see-more-slider .product-card { min-width:92vw;max-width:97vw; }
+        }
+        </style>
+    </head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <span>MC</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contacts</a>
+        </nav>
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <svg class="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+    </div>
+    <div class="side-mobile-menu" id="sideMobileMenu">
+        <div class="side-mobile-menu-header">
+            <div class="side-mobile-menu-close" id="sideMenuCloseBtn" title="Close menu">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#232526"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+        </div>
+        <div class="side-mobile-menu-links">
+            <a href="index.html">HOME</a>
+            <a href="shop.html">SHOP</a>
+            <a href="#about">ABOUT</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+    </div>
+    <section class="shop-section">
+        <div class="shop-title">Shop Men's Craving</div>
+        <div class="product-slider-container">
+            <button class="slider-arrow-btn left" id="sliderArrowLeft" aria-label="Scroll left">&#8592;</button>
+            <button class="slider-arrow-btn right" id="sliderArrowRight" aria-label="Scroll right">&#8594;</button>
+            <div class="scroll-zone left" id="scrollZoneLeft"></div>
+            <div class="scroll-zone right" id="scrollZoneRight"></div>
+            <div class="product-slider" id="productSlider">
+                <div class="product-card">
+                    <a href="product.html" style="text-decoration:none;color:inherit;display:block;">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Fragrance 1">
+                        <div class="product-name">Craving Classic</div>
+                        <div class="product-desc">A timeless blend of citrus and wood, perfect for every occasion.</div>
+                        <div class="product-price">$49</div>
+                    </a>
+                    <button class="product-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <a href="product.html" style="text-decoration:none;color:inherit;display:block;">
+                        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Fragrance 2">
+                        <div class="product-name">Urban Night</div>
+                        <div class="product-desc">Bold, spicy, and mysterious. For the modern man.</div>
+                        <div class="product-price">$59</div>
+                    </a>
+                    <button class="product-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <a href="product.html" style="text-decoration:none;color:inherit;display:block;">
+                        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Fragrance 3">
+                        <div class="product-name">Fresh Dawn</div>
+                        <div class="product-desc">Invigorating notes of mint and bergamot for a fresh start.</div>
+                        <div class="product-price">$45</div>
+                    </a>
+                    <button class="product-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <a href="product.html" style="text-decoration:none;color:inherit;display:block;">
+                        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Fragrance 4">
+                        <div class="product-name">Amber Woods</div>
+                        <div class="product-desc">Warm amber and sandalwood for a lasting impression.</div>
+                        <div class="product-price">$55</div>
+                    </a>
+                    <button class="product-btn">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <a href="product.html" style="text-decoration:none;color:inherit;display:block;">
+                        <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=400&q=80" alt="Fragrance 5">
+                        <div class="product-name">Citrus Rush</div>
+                        <div class="product-desc">A zesty burst of citrus for energetic days.</div>
+                        <div class="product-price">$42</div>
+                    </a>
+                    <button class="product-btn">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Custom scrollbar bar -->
+            <div id="productBarTrack" style="width:100%;height:10px;background:rgba(255,255,255,0.08);border-radius:6px;margin:18px 0 0 0;position:relative;overflow:hidden;">
+                <div id="productBarThumb" style="height:100%;background:linear-gradient(90deg,#fc5c7d,#6a82fb);border-radius:6px;width:60px;position:absolute;left:0;top:0;cursor:pointer;box-shadow:0 2px 8px #0002;"></div>
+            </div>
+        </div>
+       
+    </section>
+    <footer class="footer">
+        &copy; 2023 Men's Craving. All rights reserved.
+    </footer>
+    <script>
+        // Side menu logic for mobile (identical to index.html)
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sideMobileMenu = document.getElementById('sideMobileMenu');
+        const sideMenuCloseBtn = document.getElementById('sideMenuCloseBtn');
+        if (mobileMenuToggle && sideMobileMenu && sideMenuCloseBtn) {
+            mobileMenuToggle.addEventListener('click', () => {
+                sideMobileMenu.classList.add('active');
+            });
+            sideMenuCloseBtn.addEventListener('click', () => {
+                sideMobileMenu.classList.remove('active');
+            });
+            document.querySelectorAll('.side-mobile-menu-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    sideMobileMenu.classList.remove('active');
+                });
+            });
+        }
+        // --- Product slider and bar logic (robust, rebuilt, fixed) ---
+        const slider = document.getElementById('productSlider');
+        const sliderArrowLeft = document.getElementById('sliderArrowLeft');
+        const sliderArrowRight = document.getElementById('sliderArrowRight');
+        const barTrack = document.getElementById('productBarTrack');
+        const barThumb = document.getElementById('productBarThumb');
+        function getScrollAmount() {
+            if (window.innerWidth <= 600) return slider.offsetWidth * 0.95;
+            if (window.innerWidth <= 900) return 180 + 16;
+            if (window.innerWidth <= 1200) return 220 + 32;
+            return 260 + 32;
+        }
+        // Arrow navigation
+        if (sliderArrowLeft && sliderArrowRight && slider) {
+            sliderArrowLeft.addEventListener('click', (e) => {
+                e.preventDefault();
+                slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            });
+            sliderArrowRight.addEventListener('click', (e) => {
+                e.preventDefault();
+                slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+            });
+        }
+        // Bar logic
+        function updateBarThumb() {
+            if (!slider || !barTrack || !barThumb) return;
+            const visible = slider.offsetWidth;
+            const total = slider.scrollWidth;
+            const scroll = slider.scrollLeft;
+            const trackW = barTrack.offsetWidth;
+            const thumbW = Math.max(trackW * (visible / total), 40); // min width
+            const maxScroll = total - visible;
+            const maxLeft = trackW - thumbW;
+            const left = maxScroll > 0 ? (scroll / maxScroll) * maxLeft : 0;
+            barThumb.style.width = thumbW + 'px';
+            barThumb.style.left = left + 'px';
+        }
+        // Drag logic
+        let isDragging = false, dragStartX = 0, dragStartLeft = 0;
+        if (barThumb && barTrack && slider) {
+            barThumb.addEventListener('mousedown', e => {
+                isDragging = true;
+                dragStartX = e.clientX;
+                dragStartLeft = parseFloat(barThumb.style.left) || 0;
+                document.body.style.userSelect = 'none';
+            });
+            window.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                const dx = e.clientX - dragStartX;
+                const trackW = barTrack.offsetWidth;
+                const thumbW = barThumb.offsetWidth;
+                let newLeft = Math.min(Math.max(dragStartLeft + dx, 0), trackW - thumbW);
+                barThumb.style.left = newLeft + 'px';
+                // Sync slider scroll in real time
+                const maxScroll = slider.scrollWidth - slider.offsetWidth;
+                const maxLeft = trackW - thumbW;
+                slider.scrollLeft = maxScroll > 0 ? (newLeft / maxLeft) * maxScroll : 0;
+            });
+            window.addEventListener('mouseup', () => { isDragging = false; document.body.style.userSelect = ''; });
+            // Touch support
+            barThumb.addEventListener('touchstart', e => {
+                isDragging = true;
+                dragStartX = e.touches[0].clientX;
+                dragStartLeft = parseFloat(barThumb.style.left) || 0;
+            });
+            window.addEventListener('touchmove', e => {
+                if (!isDragging) return;
+                const dx = e.touches[0].clientX - dragStartX;
+                const trackW = barTrack.offsetWidth;
+                const thumbW = barThumb.offsetWidth;
+                let newLeft = Math.min(Math.max(dragStartLeft + dx, 0), trackW - thumbW);
+                barThumb.style.left = newLeft + 'px';
+                const maxScroll = slider.scrollWidth - slider.offsetWidth;
+                const maxLeft = trackW - thumbW;
+                slider.scrollLeft = maxScroll > 0 ? (newLeft / maxLeft) * maxScroll : 0;
+            }, {passive:false});
+            window.addEventListener('touchend', () => { isDragging = false; });
+        }
+        // Click on barTrack to jump
+        if (barTrack && barThumb && slider) {
+            barTrack.addEventListener('mousedown', e => {
+                if (e.target === barThumb) return;
+                const rect = barTrack.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const thumbW = barThumb.offsetWidth;
+                const trackW = barTrack.offsetWidth;
+                const maxLeft = trackW - thumbW;
+                let newLeft = Math.min(Math.max(clickX - thumbW / 2, 0), maxLeft);
+                barThumb.style.left = newLeft + 'px';
+                const maxScroll = slider.scrollWidth - slider.offsetWidth;
+                slider.scrollLeft = maxScroll > 0 ? (newLeft / maxLeft) * maxScroll : 0;
+            });
+            // Touch support for barTrack click
+            barTrack.addEventListener('touchstart', e => {
+                if (e.target === barThumb) return;
+                const rect = barTrack.getBoundingClientRect();
+                const clickX = e.touches[0].clientX - rect.left;
+                const thumbW = barThumb.offsetWidth;
+                const trackW = barTrack.offsetWidth;
+                const maxLeft = trackW - thumbW;
+                let newLeft = Math.min(Math.max(clickX - thumbW / 2, 0), maxLeft);
+                barThumb.style.left = newLeft + 'px';
+                const maxScroll = slider.scrollWidth - slider.offsetWidth;
+                slider.scrollLeft = maxScroll > 0 ? (newLeft / maxLeft) * maxScroll : 0;
+            }, {passive:false});
+        }
+        // Sync bar on slider scroll/resize
+        if (slider) {
+            slider.addEventListener('scroll', updateBarThumb);
+            window.addEventListener('resize', updateBarThumb);
+            // Also update on DOMContentLoaded to ensure correct initial state
+            document.addEventListener('DOMContentLoaded', updateBarThumb);
+            setTimeout(updateBarThumb, 100);
+        }
+        // Ensure bar thumb updates after images load (slider width may change)
+        window.addEventListener('load', updateBarThumb);
+        // See More Products slider logic
+        const seeMoreSlider = document.getElementById('seeMoreSlider');
+        const seeMoreArrowLeft = document.getElementById('seeMoreArrowLeft');
+        const seeMoreArrowRight = document.getElementById('seeMoreArrowRight');
+        function getSeeMoreScrollAmount() {
+            if (!seeMoreSlider) return 0;
+            if (window.innerWidth <= 600) return seeMoreSlider.offsetWidth * 0.95;
+            if (window.innerWidth <= 900) return 180 + 16;
+            if (window.innerWidth <= 1200) return 220 + 32;
+            return 260 + 32;
+        }
+        if (seeMoreArrowLeft && seeMoreArrowRight && seeMoreSlider) {
+            seeMoreArrowLeft.addEventListener('click', (e) => {
+                e.preventDefault();
+                seeMoreSlider.scrollBy({ left: -getSeeMoreScrollAmount(), behavior: 'smooth' });
+            });
+            seeMoreArrowRight.addEventListener('click', (e) => {
+                e.preventDefault();
+                seeMoreSlider.scrollBy({ left: getSeeMoreScrollAmount(), behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Craving - Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #181a1b;
+            color: #fff;
+            min-height: 100vh;
+            overscroll-behavior: contain;
+        }
+        .navbar {
+            width: 90vw;
+            max-width: 1200px;
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.7rem 2.5vw;
+            z-index: 10;
+            box-shadow: 0 4px 32px #0003;
+            border-radius: 40px;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08);
+            animation: fadeInDown 1.2s cubic-bezier(.77,0,.18,1) 0.1s both;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .navbar .logo {
+            position: absolute;
+            left: 0;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            height: 80%;
+        }
+        .navbar .logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: left;
+            position-area: left;
+            padding-left: 0;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .navbar nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .navbar nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .navbar nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+            transition: width 0.3s;
+            position: absolute;
+            left: 0; bottom: -4px;
+        }
+        .navbar nav a:hover {
+            color: #fc5c7d;
+        }
+        .navbar nav a:hover::after {
+            width: 100%;
+        }
+        @media (min-width: 601px) {
+            .mobile-menu { display: none !important; }
+        }
+        @media (max-width: 900px) {
+            .navbar {
+                width: 98vw;
+                padding: 0.7rem 2vw;
+                max-width: 100vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                width: 98vw;
+                padding: 0.7rem 4vw;
+                top: 0.7rem;
+                border-radius: 32px;
+            }
+            .navbar .logo {
+                position: absolute;
+                left: 0;
+                padding-left: 25px;
+                font-size: 1.7rem;
+            }
+            .navbar nav {
+                display: none;
+            }
+            .navbar .menu-toggle {
+                display: flex !important;
+                align-items: center;
+                margin-left: auto;
+                cursor: pointer;
+                z-index: 101;
+            }
+        }
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .navbar {
+                width: 96vw;
+                padding: 0.7rem 2vw;
+                max-width: 100vw;
+            }
+        }
+        .side-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: auto;
+            bottom: 0;
+            width: 80vw;
+            max-width: 320px;
+            background: #232323;
+            box-shadow: -4px 0 32px #0006;
+            z-index: 200;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(.77,0,.18,1);
+            border-radius: 32px 0 0 32px;
+            padding-top: 2rem;
+        }
+        .side-mobile-menu.active {
+            display: block;
+            transform: translateX(0);
+        }
+        .side-mobile-menu-header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 1.2rem 0.5rem 0;
+        }
+        .side-mobile-menu-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .side-mobile-menu-close svg {
+            width: 28px;
+            height: 28px;
+        }
+        .side-mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-left: 2rem;
+            margin-top: 2rem;
+        }
+        .side-mobile-menu-links a {
+            color: #fff;
+            font-size: 1.7rem;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .side-mobile-menu-links a:hover {
+            color: #fc5c7d;
+        }
+        .mobile-menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        .icon-menu {
+            width: 24px;
+            height: 24px;
+        }
+        @media (max-width: 600px) {
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                margin-left: auto;
+                cursor: pointer;
+                z-index: 101;
+            }
+            .mobile-menu-toggle .icon-menu {
+                width: 32px;
+                height: 32px;
+                fill: #fff;
+            }
+        }
+        /* --- Product page specific styles --- */
+        .product-main-section {
+            margin-top: 8rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 4vw;
+            width: 100vw;
+            min-height: 70vh;
+            padding-bottom: 3rem;
+        }
+        .product-image-box {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 4px 32px #6a82fb11;
+            padding: 2.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 320px;
+            max-width: 380px;
+            width: 30vw;
+        }
+        .product-image-box img {
+            width: 180px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px #fc5c7d22;
+        }
+        .product-details-box {
+            background: rgba(255,255,255,0.08);
+            border-radius: 24px;
+            box-shadow: 0 4px 32px #23232322;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            min-width: 320px;
+            max-width: 480px;
+            width: 35vw;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+        }
+        .product-desc {
+            font-size: 1.1rem;
+            color: #b3b8c2;
+            margin-bottom: 2rem;
+        }
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fc5c7d;
+            margin-bottom: 2rem;
+        }
+        .product-qty-label {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .product-qty-input {
+            width: 70px;
+            padding: 0.6rem 0.7rem;
+            font-size: 1.1rem;
+            border-radius: 16px;
+            border: 1px solid #ececec;
+            margin-bottom: 2rem;
+            outline: none;
+            background: #fff;
+            color: #232526;
+            font-weight: 600;
+        }
+        .purchase-btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(90deg, #fc5c7d 0%, #6a82fb 100%);
+            border: none;
+            border-radius: 32px;
+            cursor: pointer;
+            box-shadow: 0 4px 24px #fc5c7d22;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .purchase-btn:hover {
+            transform: scale(1.07);
+            box-shadow: 0 8px 32px #fc5c7d44, 0 4px 24px #6a82fb22;
+        }
+        @media (max-width: 900px) {
+            .product-main-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                margin-top: 7rem;
+            }
+            .product-image-box, .product-details-box {
+                min-width: 220px;
+                max-width: 95vw;
+                width: 95vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .product-main-section {
+                margin-top: 5.5rem;
+                padding-bottom: 2rem;
+            }
+            .product-image-box, .product-details-box {
+                padding: 1.2rem 0.7rem;
+            }
+            .product-title {
+                font-size: 1.3rem;
+            }
+            .product-desc {
+                font-size: 1rem;
+            }
+            .product-price {
+                font-size: 1.1rem;
+            }
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 2rem 0 1rem 0;
+            color: #aaa;
+            font-size: 1rem;
+            background: #fff;
+            margin-top: 3rem;
+            border-top: 1px solid #ececec;
+        }
+        /* --- Related Products Slider styles --- */
+        .related-products-section {
+            margin: 3rem auto 0 auto;
+            max-width: 1200px;
+            width: 90vw;
+            padding-bottom: 2rem;
+        }
+        .related-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-align: left;
+        }
+        .related-slider-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .related-slider {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+        .related-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 4px 32px #6a82fb11;
+            padding: 1.5rem 1.2rem 2rem 1.2rem;
+            min-width: 220px;
+            max-width: 260px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #ececec;
+            color: #232526;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .related-card img {
+            width: 100px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 16px #fc5c7d22;
+        }
+        .related-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .related-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fc5c7d;
+            margin-bottom: 1.2rem;
+        }
+        @media (max-width: 600px) {
+            .related-slider {
+                gap: 1rem;
+            }
+            .related-card {
+                min-width: 90vw;
+                max-width: 95vw;
+                padding: 1.2rem 0.7rem 1.5rem 0.7rem;
+            }
+        }
+        /* --- See More Products Slider styles --- */
+        .see-more-slider-container { margin-bottom: 2.5rem; }
+        .see-more-slider { overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+        .see-more-slider::-webkit-scrollbar { display: none; }
+        @media (max-width: 900px) {
+            .see-more-slider-container { width:98vw;max-width:100vw; }
+        }
+        @media (max-width: 600px) {
+            .see-more-slider-container { width:100vw;max-width:100vw; }
+            .see-more-slider .related-product-card { min-width:92vw;max-width:97vw; }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <span>MC</span>
+        </div>
+        <nav class="desktop-nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contacts</a>
+        </nav>
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <svg class="icon-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+    </div>
+    <div class="side-mobile-menu" id="sideMobileMenu">
+        <div class="side-mobile-menu-header">
+            <div class="side-mobile-menu-close" id="sideMenuCloseBtn" title="Close menu">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#232526"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+        </div>
+        <div class="side-mobile-menu-links">
+            <a href="index.html">HOME</a>
+            <a href="shop.html">SHOP</a>
+            <a href="#about">ABOUT</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+    </div>
+    <section class="product-main-section">
+        <div class="product-image-box">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Craving Classic">
+        </div>
+        <div class="product-details-box">
+            <div class="product-title">Craving Classic</div>
+            <div class="product-desc">A timeless blend of citrus and wood, perfect for every occasion. Experience the signature scent of Men's Craving in its purest form.</div>
+            <div class="product-price">$49</div>
+            <label class="product-qty-label" for="productQty">Quantity</label>
+            <input class="product-qty-input" id="productQty" type="number" min="1" max="99" value="1">
+            <button class="purchase-btn">Purchase</button>
+        </div>
+    </section>
+    <!-- Related Products Slider -->
+    <section class="related-products-section" style="max-width:1200px;margin:0 auto 2.5rem auto;padding:0 2vw;">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:#fff;margin-bottom:1.2rem;letter-spacing:1px;">Related Products</h2>
+        <div class="related-slider-wrapper" style="position:relative;">
+            <button class="related-arrow left" id="relatedLeft" aria-label="Scroll left" style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:2;background:rgba(30,30,30,0.7);border:none;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px #0004;cursor:pointer;transition:background 0.2s;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div class="related-products-slider" id="relatedSlider" style="overflow-x:auto;scroll-behavior:smooth;display:flex;gap:2rem;padding:1.2rem 2.7rem 1.2rem 2.7rem;">
+                <!-- Product Card 1 -->
+                <a href="product.html" class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Craving Sport" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Craving Sport</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$39</div>
+                </a>
+                <!-- Product Card 2 -->
+                <a href="product.html" class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Craving Night" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Craving Night</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$59</div>
+                </a>
+                <!-- Product Card 3 -->
+                <a href="product.html" class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=400&q=80" alt="Craving Fresh" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Craving Fresh</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$44</div>
+                </a>
+                <!-- Product Card 4 -->
+                <a href="product.html" class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Craving Oud" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Craving Oud</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$69</div>
+                </a>
+                <!-- Product Card 5 -->
+                <a href="product.html" class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Craving Aqua" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Craving Aqua</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$54</div>
+                </a>
+            </div>
+            <button class="related-arrow right" id="relatedRight" aria-label="Scroll right" style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:2;background:rgba(30,30,30,0.7);border:none;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px #0004;cursor:pointer;transition:background 0.2s;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+    </section>
+    <!-- See More Products Slider -->
+    <section class="see-more-section" style="max-width:1200px;margin:2.5rem auto 0 auto;padding:0 2vw;">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:1.2rem;letter-spacing:1px;">See More Products</h2>
+        <div class="see-more-slider-container" style="position:relative;width:100%;overflow:hidden;">
+            <button class="slider-arrow-btn left" id="seeMoreArrowLeft" aria-label="Scroll left" style="top:40%;left:8px;">&#8592;</button>
+            <button class="slider-arrow-btn right" id="seeMoreArrowRight" aria-label="Scroll right" style="top:40%;right:8px;">&#8594;</button>
+            <div class="see-more-slider" id="seeMoreSlider" style="display:flex;gap:2rem;transition:transform 0.4s cubic-bezier(.77,0,.18,1);overflow-x:auto;scroll-behavior:smooth;">
+                <div class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Fragrance 10" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Forest Spirit</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$52</div>
+                </div>
+                <div class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Fragrance 11" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Citrus Grove</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$47</div>
+                </div>
+                <div class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Fragrance 12" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Amber Sky</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$58</div>
+                </div>
+                <div class="related-product-card" style="background:#fff;border-radius:18px;box-shadow:0 2px 16px #6a82fb11;min-width:220px;max-width:220px;display:flex;flex-direction:column;align-items:center;text-decoration:none;transition:transform 0.18s;">
+                    <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Fragrance 13" style="width:110px;height:140px;object-fit:cover;border-radius:12px;margin-top:1.2rem;box-shadow:0 2px 12px #fc5c7d22;">
+                    <div style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#232526;margin:1rem 0 0.5rem 0;">Urban Musk</div>
+                    <div style="color:#6a82fb;font-weight:600;font-size:1rem;margin-bottom:1.2rem;">$61</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        &copy; 2023 Men's Craving. All rights reserved.
+    </footer>
+    <script>
+        // Side menu logic for mobile (identical to index.html)
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sideMobileMenu = document.getElementById('sideMobileMenu');
+        const sideMenuCloseBtn = document.getElementById('sideMenuCloseBtn');
+        if (mobileMenuToggle && sideMobileMenu && sideMenuCloseBtn) {
+            mobileMenuToggle.addEventListener('click', () => {
+                sideMobileMenu.classList.add('active');
+            });
+            sideMenuCloseBtn.addEventListener('click', () => {
+                sideMobileMenu.classList.remove('active');
+            });
+            document.querySelectorAll('.side-mobile-menu-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    sideMobileMenu.classList.remove('active');
+                });
+            });
+        }
+        // Related products slider logic (with arrows)
+        const relatedSlider = document.getElementById('relatedSlider');
+        const relatedLeft = document.getElementById('relatedLeft');
+        const relatedRight = document.getElementById('relatedRight');
+        function getCardWidth() {
+            const card = relatedSlider?.querySelector('.related-product-card');
+            if (!card) return 252;
+            const style = window.getComputedStyle(card);
+            const width = card.offsetWidth;
+            const gap = parseInt(style.marginRight || '32', 10) || 32;
+            return width + gap;
+        }
+        function getCardsPerView() {
+            if(window.innerWidth <= 600) return 1;
+            if(window.innerWidth <= 900) return 2;
+            return 3;
+        }
+        function getScrollAmount() {
+            return getCardWidth() * getCardsPerView();
+        }
+        function updateArrows() {
+            if (!relatedSlider) return;
+            relatedLeft.disabled = relatedSlider.scrollLeft <= 0;
+            relatedRight.disabled = relatedSlider.scrollLeft + relatedSlider.offsetWidth >= relatedSlider.scrollWidth - 2;
+            relatedLeft.style.opacity = relatedLeft.disabled ? 0.3 : 1;
+            relatedRight.style.opacity = relatedRight.disabled ? 0.3 : 1;
+        }
+        if (relatedSlider && relatedLeft && relatedRight) {
+            relatedLeft.addEventListener('click', () => {
+                relatedSlider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                setTimeout(updateArrows, 400);
+            });
+            relatedRight.addEventListener('click', () => {
+                relatedSlider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                setTimeout(updateArrows, 400);
+            });
+            relatedSlider.addEventListener('scroll', updateArrows);
+            window.addEventListener('resize', updateArrows);
+            setTimeout(updateArrows, 100);
+        }
+        // See More Products slider logic
+        const seeMoreSlider = document.getElementById('seeMoreSlider');
+        const seeMoreArrowLeft = document.getElementById('seeMoreArrowLeft');
+        const seeMoreArrowRight = document.getElementById('seeMoreArrowRight');
+        function getSeeMoreScrollAmount() {
+            if (!seeMoreSlider) return 0;
+            if (window.innerWidth <= 600) return seeMoreSlider.offsetWidth * 0.95;
+            if (window.innerWidth <= 900) return 180 + 16;
+            if (window.innerWidth <= 1200) return 220 + 32;
+            return 260 + 32;
+        }
+        if (seeMoreArrowLeft && seeMoreArrowRight && seeMoreSlider) {
+            seeMoreArrowLeft.addEventListener('click', (e) => {
+                e.preventDefault();
+                seeMoreSlider.scrollBy({ left: -getSeeMoreScrollAmount(), behavior: 'smooth' });
+            });
+            seeMoreArrowRight.addEventListener('click', (e) => {
+                e.preventDefault();
+                seeMoreSlider.scrollBy({ left: getSeeMoreScrollAmount(), behavior: 'smooth' });
+            });
+        }
+    </script>
+</body>
+</html>
